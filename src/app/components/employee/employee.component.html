@@ -1,0 +1,92 @@
+<div class="w-full px-20 py-12 flex">
+  <div class="w-4/12 min-h-screen flex flex-col gap-7">
+    <h2 class="text-2xl">Formulario</h2>
+    <form
+      #employeeForm="ngForm"
+      (ngSubmit)="addEmployee(employeeForm)"
+      class="flex flex-col gap-5 items-start"
+    >
+      <input
+        type="hidden"
+        name="_id"
+        [(ngModel)]="employeeServices.selectedEmployee._id"
+      />
+
+      <label for=""
+        >Full Name:
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="employeeServices.selectedEmployee.name"
+          placeholder="Enter your FullName"
+        />
+      </label>
+      <label for=""
+        >Position:
+        <input
+          type="text"
+          name="position"
+          [(ngModel)]="employeeServices.selectedEmployee.position"
+          placeholder="Enter your Position"
+        />
+      </label>
+      <label for=""
+        >Office:
+        <input
+          type="text"
+          name="office"
+          [(ngModel)]="employeeServices.selectedEmployee.office"
+          placeholder="Enter your Office"
+        />
+      </label>
+      <label for=""
+        >Salary:
+        <input
+          type="number"
+          name="salary"
+          [(ngModel)]="employeeServices.selectedEmployee.salary"
+          placeholder="Enter your Salary"
+        />
+      </label>
+
+      <button class="bg-slate-300 py-1 px-3" (click)="resetForm(employeeForm)">
+        Clean
+      </button>
+      <button class="bg-green-600 py-1 px-3">Save</button>
+    </form>
+  </div>
+  <div class="w-8/12 min-h-screen">
+    <table class="border-2 table-auto border-black w-full">
+      <thead>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Office</th>
+        <th>Operations</th>
+      </thead>
+      <tbody>
+        <tr
+          class="border-2 border-black"
+          *ngFor="let employee of employeeServices.employees"
+        >
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.position }}</td>
+          <td>{{ employee.office }}</td>
+          <td class="flex justify-center gap-5">
+            <button
+              class="bg-blue-900 text-white px-4 py-1"
+              (click)="editEmployee(employee)"
+            >
+              Edit
+            </button>
+            <button
+              class="bg-red-800 text-white px-4 py-1"
+              (click)="deleteEmployee(employee._id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
